@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class BookInfo {
-    private long bookId;
+
+    private String bookId;
     private String title;
     private String author;
-    private boolean createCatalogEntry;
+    private int revision;
+
 }

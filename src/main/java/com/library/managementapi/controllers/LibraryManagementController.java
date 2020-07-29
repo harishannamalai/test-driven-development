@@ -11,9 +11,7 @@ import java.util.List;
 public class LibraryManagementController {
 
     @GetMapping("/catalog/books")
-    public List<CatalogResponseItem> getBooksInCatalog(@PathVariable(name = "bookId") String bookId){
-        CatalogResponseItem item = new CatalogResponseItem();
-
+    public List<CatalogResponseItem> getBooksInCatalog(@PathVariable(name = "bookId", required = false) String bookId){
         return new ArrayList<>();
     }
 

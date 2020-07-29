@@ -18,6 +18,7 @@ public class CatalogEntry {
     private long catalogId;
     private long bookId;
     private long userId;
+    private int revision;
     private CatalogStatus status;
     private Date borrowedDate;
     private Date returnDate;

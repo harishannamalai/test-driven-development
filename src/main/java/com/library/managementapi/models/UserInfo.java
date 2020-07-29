@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class UserInfo {
     private long userId;
-    private String Name;
+    private String name;
+    private String email;
     private boolean active;
-    private boolean createUser;
+
 }
