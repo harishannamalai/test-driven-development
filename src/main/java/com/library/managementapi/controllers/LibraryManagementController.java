@@ -4,6 +4,7 @@ import com.library.managementapi.models.CatalogRequest;
 import com.library.managementapi.models.CatalogResponseItem;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public class LibraryManagementController {
 
     @GetMapping("/catalog/books")
-    public List<CatalogResponseItem> getBooksInCatalog(@PathVariable(name = "bookId", required = false) String bookId){
+    public List<CatalogResponseItem> getBooksInCatalog(@PathParam("bookId") String bookId){
         return new ArrayList<>();
     }
 
