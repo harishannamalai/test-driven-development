@@ -14,7 +14,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockReset;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -35,13 +34,13 @@ public class UserCanReturnBooksToLibraryTests {
     @Autowired
     private ObjectMapper mapper;
 
-    private User testUser;
-    private Book book1;
-    private Book book2;
+    private static User testUser;
+    private static Book book1;
+    private static Book book2;
 
     @Test
     @Order(1)
-    private void init() throws Exception{
+    public void init() throws Exception {
         User user1 = TestUtils.createUser(mockMvc, mapper, TestUtils.createUserInfo("Rajesh", "rajesh@gmail.com", true));
         Assert.isTrue(user1.getUserId() > 0, "User Id, Not Generated");
         log.info(user1);

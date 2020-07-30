@@ -34,11 +34,11 @@ public class UserCanBorrowBooksFromLibraryTests {
     @Autowired
     private ObjectMapper mapper;
 
-    private User testUser;
+    private static User testUser;
 
     @Test
-    @Order(1)
-    private void init() throws Exception{
+    @Order(0)
+    public void init() throws Exception {
         User user = TestUtils.createUser(mockMvc, mapper, TestUtils.createUserInfo("Harish A", "cerium11@gmail.com", true));
         Assert.isTrue(user.getUserId() > 0, "User Id, Not Generated");
         log.info(user);
@@ -68,16 +68,16 @@ public class UserCanBorrowBooksFromLibraryTests {
         List<CatalogResponseItem> items = mapper.readValue(mvcResult.getResponse().getContentAsString(),
                 mapper.getTypeFactory().constructCollectionType(List.class, CatalogResponseItem.class));
 
-        Assert.isTrue(!items.isEmpty(),"Empty Library should have zero Books, but books are returned!");
-        Assert.isTrue(items.stream().map(CatalogResponseItem::getBookId).noneMatch(p -> p == book.getBookId()), "Borrowed Book Found in Response.");
+        Assert.isTrue(!items.isEmpty(), "Empty Library should have zero Books, but books are returned!");
+        Assert.isTrue(items.stream().map(CatalogResponseItem::getBookId).anyMatch(p -> p == book.getBookId()), "Borrowed Book Not Found in Response.");
 
         mvcResult = mockMvc.perform(MockMvcRequestBuilders
-                .get("/catalog/books?bookId="+book.getBookId()))
+                .get("/catalog/books?bookId=" + book.getBookId()))
                 .andReturn();
 
         items = mapper.readValue(mvcResult.getResponse().getContentAsString(), mapper.getTypeFactory().constructCollectionType(List.class, CatalogResponseItem.class));
 
-        Assert.isTrue(items.isEmpty(),"Empty Library should have zero Books, but books are returned!");
+        Assert.isTrue(items.isEmpty(), "Empty Library should have zero Books, but books are returned!");
 
         log.info("------------- End  -----------------------------------------------------");
         log.info("---When Book are available Then Book is Borrowed and Removed -----------");

@@ -34,12 +34,12 @@ public class UserCanBorrowCopyOfBookFromLibraryTests {
     @Autowired
     private ObjectMapper mapper;
 
-    private User testUser1;
-    private User testUser2;
+    private static User testUser1;
+    private static User testUser2;
 
     @Test
     @Order(1)
-    private void init() throws Exception{
+    public void init() throws Exception {
         User user1 = TestUtils.createUser(mockMvc, mapper, TestUtils.createUserInfo("Harish Annamalai", "cerium11@gmail.com", true));
         Assert.isTrue(user1.getUserId() > 0, "User Id, Not Generated");
         log.info(user1);

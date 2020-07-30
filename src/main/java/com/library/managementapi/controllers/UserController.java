@@ -1,23 +1,26 @@
 package com.library.managementapi.controllers;
 
-import com.library.managementapi.entities.Book;
 import com.library.managementapi.entities.User;
-import com.library.managementapi.models.BookInfo;
+import com.library.managementapi.models.UserInfo;
+import com.library.managementapi.services.UserManagementService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class UserController {
 
+    @Autowired
+    UserManagementService service;
+
     @GetMapping("/users")
-    public List<Book> listUsers(@PathVariable(name = "bookId", required = false) String userId){
-        return new ArrayList<>();
+    public List<User> listUsers(@PathVariable(name = "bookId", required = false) String userId) {
+        return service.getAllUsers();
     }
 
     @PostMapping("/users")
-    public User createUser(@RequestBody BookInfo UserInfo){
-        return new User();
+    public User createUser(@RequestBody UserInfo info) {
+        return service.createNewUser(info);
     }
 }

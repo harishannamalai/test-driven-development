@@ -12,4 +12,10 @@ public interface CatalogRepository extends JpaRepository<CatalogEntry, Long> {
 
     List<CatalogEntry> findAllByStatus(CatalogStatus status);
 
+    List<CatalogEntry> findAllByBookId(long bookId);
+
+    List<CatalogEntry> findAllByBookIdAndStatus(long bookId, CatalogStatus status);
+
+    List<CatalogEntry> findAllByUserId(long userId);
+
 }
