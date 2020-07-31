@@ -10,11 +10,11 @@ import java.util.List;
 @Repository
 public interface CatalogRepository extends JpaRepository<CatalogEntry, Long> {
 
-    List<CatalogEntry> findAllByStatus(CatalogStatus status);
+    List<CatalogEntry> findAllByStatusOrderByBookIdAsc(CatalogStatus status);
 
-    List<CatalogEntry> findAllByBookId(long bookId);
+    List<CatalogEntry> findAllByBookIdAndStatusOrderByBookIdAsc(long bookId, CatalogStatus status);
 
-    List<CatalogEntry> findAllByBookIdAndStatus(long bookId, CatalogStatus status);
+    List<CatalogEntry> findAllByUserIdAndBookIdAndStatusOrderByBookIdAsc(long userId, long bookId, CatalogStatus status);
 
     List<CatalogEntry> findAllByUserId(long userId);
 

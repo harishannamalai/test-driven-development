@@ -5,15 +5,17 @@ import com.library.managementapi.entities.Book;
 import com.library.managementapi.entities.User;
 import com.library.managementapi.models.BookInfo;
 import com.library.managementapi.models.UserInfo;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+@Log4j2
 public class TestUtils {
 
     public static Book addBookToLibrary(MockMvc mockMvc, ObjectMapper mapper, BookInfo info) throws Exception {
-
+        log.info("Invoking API for creating books: " + info);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/books/")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -32,7 +34,7 @@ public class TestUtils {
     }
 
     public static User createUser(MockMvc mockMvc, ObjectMapper mapper, UserInfo info) throws Exception {
-
+        log.debug("Invoking API for creating users: " + info);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/users/")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)

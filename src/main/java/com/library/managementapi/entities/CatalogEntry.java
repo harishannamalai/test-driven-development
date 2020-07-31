@@ -9,6 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
 
+/**
+ * This Class Represents the Catalog of the library, along with the book self and borrowed Data.
+ * <p>
+ * Each physical book represents one entry, which can be either Available or Borrowed etc.
+ * <p>
+ * User Id represents the book that is borrowed by each user.
+ */
+
 @Data
 @Entity
 public class CatalogEntry {

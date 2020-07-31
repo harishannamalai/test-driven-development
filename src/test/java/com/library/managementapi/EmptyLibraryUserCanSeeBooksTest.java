@@ -18,6 +18,18 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+/**
+ * Test Cases for User Story/Use Case 1
+ * <p>
+ * Given​, there are no books in the library
+ * When​, I view the books in the library
+ * Then​, I see an empty library
+ * <p>
+ * Given​, there are books in the library
+ * When​, I view the books in the library
+ * Then​, I see the list of books in the library
+ */
+
 @AutoConfigureMockMvc
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

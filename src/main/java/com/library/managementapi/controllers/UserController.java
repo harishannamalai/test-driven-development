@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller exposes APIs for creating and viewing users.
+ */
+
 @RestController
 public class UserController {
 

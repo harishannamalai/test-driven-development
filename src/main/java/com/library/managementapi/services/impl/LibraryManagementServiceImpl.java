@@ -83,9 +83,9 @@ public class LibraryManagementServiceImpl implements LibraryManagementService {
         List<CatalogEntry> entries = repository.findAllByUserId(userId);
         boolean borrowedAlready = entries.stream().map(CatalogEntry::getBookId).anyMatch(e -> e == bookId);
         if (entries.size() <= BOOK_LIMIT_PER_USER && !borrowedAlready) {
-            CatalogEntry bookEntry = repository.findAllByBookIdAndStatus(bookId, CatalogStatus.AVAILABLE).stream().sorted().findFirst().orElse(null);
+            CatalogEntry bookEntry = repository.findAllByBookIdAndStatusOrderByBookIdAsc(bookId, CatalogStatus.AVAILABLE).stream().findFirst().orElse(null);
             if (bookEntry == null) {
-                throw new IllegalArgumentException("Book Id not available or Invalid");
+                throw new IllegalArgumentException("Book Id not available or Invalid!");
             } else {
                 bookEntry.setStatus(CatalogStatus.BORROWED);
                 bookEntry.setUserId(userId);
@@ -100,15 +100,29 @@ public class LibraryManagementServiceImpl implements LibraryManagementService {
 
     private List<CatalogResponseItem> processReturnAction(long userId, long bookId) {
         List<CatalogEntry> entries = repository.findAllByUserId(userId);
+        boolean borrowedAlready = entries.stream().map(CatalogEntry::getBookId).anyMatch(e -> e == bookId);
+        if (borrowedAlready) {
+            CatalogEntry bookEntry = repository.findAllByUserIdAndBookIdAndStatusOrderByBookIdAsc(userId, bookId, CatalogStatus.BORROWED).stream().findFirst().orElse(null);
+            if (bookEntry == null) {
+                throw new IllegalArgumentException("Book Not Borrowed by user or Invalid!");
+            } else {
+                bookEntry.setStatus(CatalogStatus.AVAILABLE);
+                bookEntry.setUserId(0);
+                bookEntry.setBorrowedDate(null);
+                bookEntry.setReturnDate(null);
+                repository.save(bookEntry);
+                entries = entries.stream().filter(e -> e.getBookId() != bookId).collect(Collectors.toList());
+            }
+        }
         return this.getCatalogResponseItemDetails(entries);
     }
 
     private List<CatalogResponseItem> getAllAvailableBooks() {
-        return this.getCatalogResponseItemDetails(repository.findAllByStatus(CatalogStatus.AVAILABLE));
+        return this.getCatalogResponseItemDetails(repository.findAllByStatusOrderByBookIdAsc(CatalogStatus.AVAILABLE));
     }
 
     private List<CatalogResponseItem> getAllBooksByBookId(long bookId) {
-        return this.getCatalogResponseItemDetails(repository.findAllByBookIdAndStatus(bookId, CatalogStatus.AVAILABLE));
+        return this.getCatalogResponseItemDetails(repository.findAllByBookIdAndStatusOrderByBookIdAsc(bookId, CatalogStatus.AVAILABLE));
     }
 
     private List<CatalogResponseItem> getAllBooksByUserId(long userId) {

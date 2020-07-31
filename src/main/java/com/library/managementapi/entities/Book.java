@@ -7,6 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Entity that holds the information of the Books.
+ * Each Book is unique entry here, therefore, multiple copies of same book will have one Entry Only!
+ */
+
 @Data
 @Entity
 public class Book {

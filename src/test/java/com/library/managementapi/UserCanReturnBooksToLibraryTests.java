@@ -22,6 +22,18 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+
+/**
+ * Test Cases for User Story/Use Case 4
+ * <p>
+ * When​, I return one book to the library
+ * Then​, the book is removed from my borrowed list
+ * And​, the library reflects the updated stock of the book
+ * <p>
+ * When​, I return both books to the library
+ * Then​, my borrowed list is empty
+ * And​, the library reflects the updated stock of the books
+ */
 @AutoConfigureMockMvc
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -43,7 +55,6 @@ public class UserCanReturnBooksToLibraryTests {
     public void init() throws Exception {
         User user1 = TestUtils.createUser(mockMvc, mapper, TestUtils.createUserInfo("Rajesh", "rajesh@gmail.com", true));
         Assert.isTrue(user1.getUserId() > 0, "User Id, Not Generated");
-        log.info(user1);
         testUser = user1;
     }
 
@@ -62,7 +73,7 @@ public class UserCanReturnBooksToLibraryTests {
 
         CatalogRequest request2 = new CatalogRequest();
         request2.setAction(CatalogUserAction.BORROW);
-        request2.setBookId(book1.getBookId());
+        request2.setBookId(book2.getBookId());
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .post("/catalog/user/" + testUser.getUserId())

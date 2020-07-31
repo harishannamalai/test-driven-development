@@ -22,6 +22,15 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+/**
+ * Test Cases for User Story/Use Case 2
+ * <p>
+ * When​, I choose a book to add to my borrowed list
+ * Then​, the book is added to my borrowed list
+ * And​, the book is removed from the library
+ */
+
+
 @AutoConfigureMockMvc
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
+/**
+ * This Controller exposes APIs for
+ * 1. Viewing all the available books.
+ * 2. Viewing Books borrowed by the particular user.
+ * 3. Performing a transaction - Borrow or Return Books.
+ */
+
 @RestController
 @Log4j2
 public class LibraryManagementController {
