@@ -60,4 +60,4 @@ The application is built using the following technologies.
 5. a `GET /catalog/books?bookId` - List all `AVAILABLE` books in the Catalog with the given Book Id.
 6. `GET /catalog/user/{userId}` - List all books `BORROWED` by the user.
 7. `POST /catalog/user/{userId}` - Perform the user action that is `BORROW` or `RETURN` for the given userId.
-
+-----
