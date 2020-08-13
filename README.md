@@ -1,6 +1,13 @@
-# Library Management Application.
+# Test Driven Development
+Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle viz, 
+1. Requirements are turned into very specific test cases
+2. Test the code using a testing framewrok.
+3. Then the code is improved so that the tests pass.
+4. Repeat 1 - 3, till the expected Behaviour of the product is achieved.
 
-This application is an implementation of a library management application.
+## Library Management Application.
+
+This application is an implementation of a library management application, using the Test Driven Development Approach.
 
 ## Expected Behaviour of the Library Management Application.
 The expected behaviour of the application, is described by the various user stories that are outlined as below: 
